@@ -107,7 +107,9 @@ describe('sitemap lastmod', () => {
     expect(dates.has('/anuncia/')).toBe(true);
     const date = dates.get('/juegos/minecraft/diamantes-minecraft/');
     expect(date).toBeInstanceOf(Date);
-    expect(isNaN(date!.getTime())).toBe(false);
+    if (date) {
+      expect(isNaN(date.getTime())).toBe(false);
+    }
   });
 });
 
