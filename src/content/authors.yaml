@@ -4,10 +4,12 @@
   initials: YL
   role: Creador de contenido
   kind: person
-  bio: Hace lives y batallas en TikTok y streamea Minecraft, Roblox y Free Fire desde hace 4 años. Aquí cuenta lo que le funcionó de verdad.
+  bio: Hace transmisiones en vivo y batallas en TikTok, YouTube y Kick, jugando Minecraft, Roblox y Free Fire. Aquí comparte lo que le funciona de verdad en cada plataforma.
   links:
     - name: TikTok
       url: https://www.tiktok.com/@yeriloco
+    - name: YouTube
+      url: https://www.youtube.com/@yeriloco
     - name: Kick
       url: https://kick.com/yeriloco
 

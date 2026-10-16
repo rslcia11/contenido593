@@ -14,7 +14,6 @@ import HostCard from '@/components/home/HostCard.astro';
 import Community from '@/components/home/Community.astro';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
 import ArticleList from '@/components/articles/ArticleList.astro';
-import ArticleCard from '@/components/articles/ArticleCard.astro';
 import TopList from '@/components/articles/TopList.astro';
 import NewsList from '@/components/articles/NewsList.astro';
 import ClipRail from '@/components/articles/ClipRail.astro';
@@ -89,20 +88,19 @@ const ctx = schemaContext(Astro.site);
       </aside>
     </section>
 
-    <section class="sec" aria-labelledby="home-gear">
-      <SectionHeader
-        title={SECTIONS.equipo.name}
-        id="home-gear"
-        description={SECTIONS.equipo.description}
-        more={{ label: 'Ver todo', href: sectionUrl('equipo') }}
-      />
-      <div class="grid">
-        {inSection(articles, 'equipo')
-          .slice(0, 3)
-          .map((a) => (
-            <ArticleCard article={a} />
-          ))}
+    <section class="sec split" aria-labelledby="home-gear">
+      <div>
+        <SectionHeader
+          title={SECTIONS.equipo.name}
+          id="home-gear"
+          description={SECTIONS.equipo.description}
+          more={{ label: 'Ver todo', href: sectionUrl('equipo') }}
+        />
+        <ArticleList articles={inSection(articles, 'equipo').slice(0, 3)} />
       </div>
+      <aside class="side" aria-label="Publicidad">
+        <AdSlot placement="sidebar" />
+      </aside>
     </section>
 
     <section class="sec" aria-labelledby="home-creators">
@@ -114,12 +112,8 @@ const ctx = schemaContext(Astro.site);
       />
       <div class="creators">
         <HostCard />
-        <div class="c-grid">
-          {inSection(articles, 'creadores')
-            .slice(0, 4)
-            .map((a) => (
-              <ArticleCard article={a} />
-            ))}
+        <div class="c-list">
+          <ArticleList articles={inSection(articles, 'creadores').slice(0, 4)} />
         </div>
       </div>
     </section>
@@ -242,10 +236,8 @@ const ctx = schemaContext(Astro.site);
     gap: 24px;
   }
 
-  .c-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 20px;
+  .c-list {
+    min-width: 0;
   }
 
   @media (min-width: 701px) {

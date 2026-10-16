@@ -12,7 +12,9 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
 <div class="games">
   {games.map((game) => (
     <a class={`game game--${game.id} pressable`} href={gameUrl(game.id)} data-game={game.id}>
-      <GameBadge game={game.id} size={40} />
+      <div class="badge-wrap">
+        <GameBadge game={game.id} size={54} />
+      </div>
       <div>
         <strong>{game.data.name}</strong>
         <small>{plural(inGame(articles, game.id).length, 'artículo')}</small>
@@ -20,8 +22,8 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     </a>
   ))}
   <a class="game game--all pressable" href={sectionUrl('juegos')}>
-    <div class="all-icon-wrap">
-      <Icon name="grid" size={32} />
+    <div class="badge-wrap all-icon-wrap">
+      <Icon name="grid" size={44} />
     </div>
     <div>
       <strong>Todos</strong>
@@ -102,12 +104,20 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     margin-top: 4px;
   }
 
+  .badge-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 56px;
+    margin-bottom: 8px;
+  }
+
   .all-icon-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 54px;
+    height: 54px;
   }
 
   .game--all {

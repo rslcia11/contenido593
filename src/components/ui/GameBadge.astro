@@ -5,144 +5,202 @@ interface Props {
   class?: string;
 }
 
-const { game, size = 36, class: className = '' } = Astro.props;
+const { game, size = 56, class: className = '' } = Astro.props;
 ---
 
 <div class={`game-badge game-badge--${game} ${className}`} style={`--size: ${size}px;`}>
+  {/* ---------- MINECRAFT: Bloque de césped 3D isométrico auténtico ---------- */}
   {game === 'minecraft' && (
-    <svg viewBox="0 0 40 40" width={size} height={size} fill="none" aria-hidden="true">
-      {/* 3D Isometric Grass Block */}
+    <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
       <defs>
-        <filter id="mc-shadow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.4" />
+        <filter id="mc-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#5cb82e" flood-opacity="0.35" />
         </filter>
       </defs>
-      <g filter="url(#mc-shadow)">
-        {/* Top Face (Lush Grass) */}
-        <polygon points="20,4 35,12.5 20,21 5,12.5" fill="#5cb82e" />
-        {/* Top Face Pixel Grid Highlights */}
-        <polygon points="20,4 27.5,8.25 20,12.5 12.5,8.25" fill="#71ce3b" opacity="0.6" />
-        <polygon points="16,10 20,12.5 16,14.7 12,12.5" fill="#4d9b23" />
-        <polygon points="24,9.5 28,11.8 24,14 20,11.8" fill="#7ed945" />
-        {/* Left Face (Dirt + Grass Drop) */}
-        <polygon points="5,12.5 20,21 20,36 5,27.5" fill="#735135" />
-        {/* Dirt Texture Left */}
-        <polygon points="8,19 12,21.5 12,25 8,22.5" fill="#543b25" />
-        <polygon points="14,24 17,25.8 17,28.5 14,27" fill="#8c6443" />
-        {/* Grass Fringe Left */}
-        <polygon points="5,12.5 20,21 20,24 17,22 17,25 13,22.5 13,24 9,21.5 9,23.5 5,15" fill="#4d9b23" />
-        {/* Right Face (Dirt in Shadow + Grass Drop) */}
-        <polygon points="20,21 35,12.5 35,27.5 20,36" fill="#543b25" />
-        {/* Dirt Texture Right */}
-        <polygon points="24,24 28,21.5 28,24 24,26.5" fill="#3b291a" />
-        <polygon points="27,27 31,24.5 31,27.5 27,29.8" fill="#735135" />
-        {/* Grass Fringe Right */}
-        <polygon points="35,12.5 20,21 20,24 23,22 23,25 27,22.5 27,24 31,21.5 31,23 35,14" fill="#3c7c1b" />
+      <g filter="url(#mc-glow)">
+        {/* Cara Superior (Césped vibrante) */}
+        <polygon points="24,5 43,15.5 24,26 5,15.5" fill="#5cb82e" />
+        {/* Píxeles de textura superior */}
+        <polygon points="24,5 33.5,10.2 24,15.5 14.5,10.2" fill="#78d443" opacity="0.8" />
+        <polygon points="20,12 24,14.2 20,16.5 16,14.2" fill="#4a9b23" />
+        <polygon points="28,11.5 32,13.7 28,16 24,13.7" fill="#8cee4f" />
+        <polygon points="24,18 28,20.2 24,22.5 20,20.2" fill="#78d443" />
+        <polygon points="33,16 38,18.8 33,21.5 28,18.8" fill="#4a9b23" opacity="0.9" />
+        <polygon points="15,16 20,18.8 15,21.5 10,18.8" fill="#78d443" opacity="0.9" />
+
+        {/* Cara Izquierda (Tierra + flecos de pasto) */}
+        <polygon points="5,15.5 24,26 24,43 5,32.5" fill="#6d4c31" />
+        {/* Manchas de tierra izquierda */}
+        <polygon points="8,24 13,27 13,31 8,28" fill="#4e3520" />
+        <polygon points="16,30 20,32.5 20,36 16,33.5" fill="#88603f" />
+        <polygon points="9,33 13,35.5 13,39 9,36.5" fill="#4e3520" />
+        {/* Flecos de césped cayendo a la izquierda */}
+        <polygon
+          points="5,15.5 24,26 24,29.5 21,27.5 21,31 16,28 16,30.5 11,27.5 11,30 5,18.5"
+          fill="#4a9b23"
+        />
+
+        {/* Cara Derecha (Tierra en sombra + flecos) */}
+        <polygon points="24,26 43,15.5 43,32.5 24,43" fill="#4e3520" />
+        {/* Manchas de tierra derecha */}
+        <polygon points="29,30 34,27 34,31 29,34" fill="#382516" />
+        <polygon points="34,34 39,31 39,35 34,38" fill="#6d4c31" />
+        {/* Flecos de césped cayendo a la derecha */}
+        <polygon
+          points="43,15.5 24,26 24,29.5 27,27.5 27,31 32,28 32,30.5 37,27.5 37,30 43,18.5"
+          fill="#3b7d1c"
+        />
       </g>
     </svg>
   )}
 
+  {/* ---------- ROBLOX: Tilted Square Metálico con Resplandor Neón ---------- */}
   {game === 'roblox' && (
-    <svg viewBox="0 0 40 40" width={size} height={size} fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="rbx-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="rbx-face" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FFFFFF" />
-          <stop offset="100%" stop-color="#C5D3E8" />
+          <stop offset="40%" stop-color="#E2E8F0" />
+          <stop offset="100%" stop-color="#94A3B8" />
         </linearGradient>
-        <filter id="rbx-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#00A2FF" flood-opacity="0.35" />
+        <filter id="rbx-halo" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#00A2FF" flood-opacity="0.5" />
         </filter>
       </defs>
-      <g filter="url(#rbx-glow)">
-        {/* Tilted Roblox Square (approx 15 deg tilt) */}
+      <g filter="url(#rbx-halo)">
+        {/* Marco base inclinado 15° */}
         <path
-          d="M12.5 6.5 L33.5 12 L27.5 33.5 L6.5 28 Z"
-          fill="url(#rbx-grad)"
+          d="M14 6 L42 13 L34 42 L6 35 Z"
+          fill="url(#rbx-face)"
           stroke="#0F172A"
-          stroke-width="1.5"
+          stroke-width="2"
           stroke-linejoin="round"
         />
-        {/* Hollow Centered Inner Square */}
-        <path d="M17.5 16.5 L24.5 18.5 L22.5 25.5 L15.5 23.5 Z" fill="#0B0E17" />
+        {/* Borde biselado interior */}
+        <path d="M16 9 L39 15 L32 39 L9 33 Z" fill="#FFFFFF" opacity="0.3" />
+        {/* Hueco cuadrado central inclinado */}
+        <path d="M21 20 L30 22.5 L27 31 L18 28.5 Z" fill="#080B11" />
       </g>
     </svg>
   )}
 
+  {/* ---------- GTA VI: Roman VI Sunset Vice City con Palmeras ---------- */}
   {game === 'gta6' && (
-    <svg viewBox="0 0 40 40" width={size} height={size} fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="gta-sunset" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="gta-grad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FF1493" />
-          <stop offset="50%" stop-color="#FF007F" />
-          <stop offset="100%" stop-color="#00F0FF" />
+          <stop offset="45%" stop-color="#FF007F" />
+          <stop offset="100%" stop-color="#00F5FF" />
         </linearGradient>
-        <filter id="gta-neon" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#FF007F" flood-opacity="0.6" />
+        <filter id="gta-glow-lg" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FF007F" flood-opacity="0.7" />
+          <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#00F5FF" flood-opacity="0.5" />
         </filter>
       </defs>
-      <g filter="url(#gta-neon)">
-        {/* Grand Theft Auto VI Roman Numerals with Vice City Neon Gradient */}
-        {/* Letter 'V' */}
+      <g filter="url(#gta-glow-lg)">
+        {/* Silueta sutil de palmera izquierda */}
+        <path d="M7 26 C9 18 13 14 15 12 C13 15 12 18 11 26 Z" fill="#00F5FF" opacity="0.35" />
+        <path d="M7 19 C12 17 14 15 15 12 C12 18 10 21 8 23 Z" fill="#00F5FF" opacity="0.3" />
+        {/* Silueta sutil de palmera derecha */}
+        <path d="M41 26 C39 18 35 14 33 12 C35 15 36 18 37 26 Z" fill="#FF1493" opacity="0.35" />
+        <path d="M41 19 C36 17 34 15 33 12 C36 18 38 21 40 23 Z" fill="#FF1493" opacity="0.3" />
+
+        {/* Letra 'V' */}
         <path
-          d="M6 9 L12.5 9 L16.5 27 L18 27 L22 9 L28.5 9 L20.5 31 L14 31 Z"
-          fill="url(#gta-sunset)"
+          d="M8 10 L15.5 10 L20.5 32 L22 32 L27 10 L34.5 10 L25 38 L17 38 Z"
+          fill="url(#gta-grad)"
           stroke="#000"
-          stroke-width="1"
+          stroke-width="1.2"
+          stroke-linejoin="round"
         />
-        {/* Letter 'I' */}
-        <path d="M27.5 9 L34 9 L34 31 L27.5 31 Z" fill="url(#gta-sunset)" stroke="#000" stroke-width="1" />
-        {/* Horizontal Serif Accents */}
-        <rect x="25" y="9" width="11.5" height="3" fill="url(#gta-sunset)" />
-        <rect x="25" y="28" width="11.5" height="3" fill="url(#gta-sunset)" />
+        {/* Letra 'I' con serifs horizontales clásicos */}
+        <path
+          d="M32 10 L44 10 L44 14.5 L40 14.5 L40 33.5 L44 33.5 L44 38 L32 38 L32 33.5 L36 33.5 L36 14.5 L32 14.5 Z"
+          fill="url(#gta-grad)"
+          stroke="#000"
+          stroke-width="1.2"
+          stroke-linejoin="round"
+        />
       </g>
     </svg>
   )}
 
+  {/* ---------- FREE FIRE: Emblema Bélico Alado de Fuego (Auténtico FF) ---------- */}
   {game === 'freefire' && (
-    <svg viewBox="0 0 40 40" width={size} height={size} fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="ff-flame" x1="0%" y1="100%" x2="50%" y2="0%">
-          <stop offset="0%" stop-color="#FF2A00" />
-          <stop offset="50%" stop-color="#FF6B00" />
-          <stop offset="100%" stop-color="#FFD600" />
+        <linearGradient id="ff-flame-core" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#D00000" />
+          <stop offset="35%" stop-color="#FF3E00" />
+          <stop offset="70%" stop-color="#FF9500" />
+          <stop offset="100%" stop-color="#FFEA00" />
         </linearGradient>
-        <filter id="ff-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#FF4500" flood-opacity="0.6" />
+        <linearGradient id="ff-wing-left" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#990000" />
+          <stop offset="60%" stop-color="#FF3E00" />
+          <stop offset="100%" stop-color="#FFAA00" />
+        </linearGradient>
+        <filter id="ff-inferno" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#FF3E00" flood-opacity="0.8" />
+          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#FFEA00" flood-opacity="0.6" />
         </filter>
       </defs>
-      <g filter="url(#ff-glow)">
-        {/* Free Fire Winged Flame Blade */}
+      <g filter="url(#ff-inferno)">
+        {/* Ala de fuego izquierda estilizada */}
         <path
-          d="M20 4 C21 11 27 15 27 21 C27 29 20 36 20 36 C20 36 13 29 13 21 C13 16 16 12 18 8 Z"
-          fill="url(#ff-flame)"
+          d="M24 38 C17 36 7 28 4 18 C8 19 13 17 16 13 C14 17 12 21 15 25 C18 20 20 16 22 9 C22 16 19 22 23 27 Z"
+          fill="url(#ff-wing-left)"
         />
+        {/* Ala de fuego derecha estilizada */}
         <path
-          d="M20 14 C21 18 24 20 24 24 C24 28 20 32 20 32 C20 32 16 28 16 24 C16 20 18 17 20 14 Z"
-          fill="#FFF275"
+          d="M24 38 C31 36 41 28 44 18 C40 19 35 17 32 13 C34 17 36 21 33 25 C30 20 28 16 26 9 C26 16 29 22 25 27 Z"
+          fill="url(#ff-wing-left)"
         />
-        {/* Knife / Wing Flashes */}
-        <path d="M8 22 C11 20 14 22 14 26 C12 28 9 26 8 22 Z" fill="#FF4500" />
-        <path d="M32 22 C29 20 26 22 26 26 C28 28 31 26 32 22 Z" fill="#FF4500" />
+
+        {/* Llama central táctica con cresta Free Fire */}
+        <path
+          d="M24 4 C27 12 34 17 34 26 C34 35 27 42 24 44 C21 42 14 35 14 26 C14 17 21 12 24 4 Z"
+          fill="url(#ff-flame-core)"
+          stroke="#450A0A"
+          stroke-width="1.2"
+        />
+
+        {/* Cuchillo / Daga de combate central en metal blanco y oro */}
+        <path d="M24 8 L27 22 L24 36 L21 22 Z" fill="#FFFBEB" />
+        <path d="M24 8 L24 36 L21 22 Z" fill="#FED7AA" />
+
+        {/* Monograma bélico FF estilizado */}
+        <path d="M21 18 L26 16 L25.5 19 L23 19.5 L22.5 22 L25 21.5 L24.5 24 L21 25 Z" fill="#7F1D1D" />
       </g>
     </svg>
   )}
 
+  {/* ---------- FORTNITE: Emblema Slanted F Battle Royale con Escudo ---------- */}
   {game === 'fortnite' && (
-    <svg viewBox="0 0 40 40" width={size} height={size} fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
       <defs>
-        <linearGradient id="fn-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#00F0FF" />
-          <stop offset="100%" stop-color="#7B2CBF" />
+        <linearGradient id="fn-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00F5FF" />
+          <stop offset="50%" stop-color="#00A2FF" />
+          <stop offset="100%" stop-color="#8B5CF6" />
         </linearGradient>
-        <filter id="fn-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#00F0FF" flood-opacity="0.5" />
+        <filter id="fn-glow-lg" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00F5FF" flood-opacity="0.6" />
         </filter>
       </defs>
-      <g filter="url(#fn-glow)">
-        {/* Fortnite Stylized Bold F */}
+      <g filter="url(#fn-glow-lg)">
+        {/* Escudo poligonal de fondo */}
+        <polygon
+          points="24,5 41,11 36,37 24,44 12,37 7,11"
+          fill="#0C1322"
+          stroke="url(#fn-neon)"
+          stroke-width="2"
+        />
+        {/* Letra 'F' clásica en relieve */}
         <path
-          d="M10 7 L30 7 L28 13 L18 13 L17 18 L26 18 L24 24 L16 24 L14 34 L8 34 Z"
-          fill="url(#fn-grad)"
+          d="M15 12 L33 12 L31 18 L22 18 L21 23 L29 23 L27 29 L20 29 L18 38 L12 38 Z"
+          fill="url(#fn-neon)"
           stroke="#000"
           stroke-width="1.2"
           stroke-linejoin="round"
@@ -160,10 +218,12 @@ const { game, size = 36, class: className = '' } = Astro.props;
     width: var(--size);
     height: var(--size);
     flex-shrink: 0;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      filter 0.3s ease;
   }
 
   .game:hover .game-badge {
-    transform: scale(1.12) translateY(-2px);
+    transform: scale(1.15) translateY(-3px);
   }
 </style>

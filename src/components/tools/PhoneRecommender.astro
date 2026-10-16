@@ -43,7 +43,22 @@ const initial = recommendPhone(DEFAULT_PHONE_GAME, DEFAULT_BUDGET);
     <small>Te recomendamos</small>
     <h3 data-tier>{initial.tier}</h3>
     <p data-advice>{initial.advice}</p>
-    <div>
+
+    <div class="models-card">
+      <span class="models-label">Modelos recomendados del mercado:</span>
+      <ul class="models-list" data-models>
+        {initial.models.map((m) => (
+          <li class="model-badge">{m}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="specs-bar">
+      <span class="specs-label">Claves técnicas:</span>
+      <span data-specs>{initial.specs}</span>
+    </div>
+
+    <div class="cta-wrap">
       <a class="btn btn--sm" href={guideHref}>
         Ver los requisitos oficiales
       </a>
@@ -66,6 +81,12 @@ const initial = recommendPhone(DEFAULT_PHONE_GAME, DEFAULT_BUDGET);
         const reco = recommendPhone(game, budget);
         required(this, '[data-tier]').textContent = reco.tier;
         required(this, '[data-advice]').textContent = reco.advice;
+        const specsEl = this.querySelector('[data-specs]');
+        if (specsEl) specsEl.textContent = reco.specs;
+        const modelsEl = this.querySelector('[data-models]');
+        if (modelsEl) {
+          modelsEl.innerHTML = reco.models.map((m) => `<li class="model-badge">${m}</li>`).join('');
+        }
       };
       this.querySelectorAll<HTMLElement>('[data-group]').forEach((group) =>
         group.addEventListener('click', (event) => {
@@ -94,7 +115,7 @@ const initial = recommendPhone(DEFAULT_PHONE_GAME, DEFAULT_BUDGET);
     border-radius: var(--radius-md);
     padding: 20px;
     display: grid;
-    gap: 8px;
+    gap: 12px;
   }
 
   small {
@@ -104,5 +125,60 @@ const initial = recommendPhone(DEFAULT_PHONE_GAME, DEFAULT_BUDGET);
   h3 {
     font-size: 1.375rem;
     font-weight: var(--weight-black);
+    line-height: 1.15;
+  }
+
+  .models-card {
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+
+  .models-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    opacity: 0.9;
+  }
+
+  .models-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .model-badge {
+    background: var(--color-bg-deep);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: var(--weight-bold);
+    padding: 5px 12px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-outline);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  .specs-bar {
+    font-size: 0.8125rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    opacity: 0.95;
+    line-height: 1.4;
+  }
+
+  .specs-label {
+    font-weight: var(--weight-bold);
+  }
+
+  .cta-wrap {
+    margin-top: 4px;
   }
 </style>

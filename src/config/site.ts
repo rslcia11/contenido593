@@ -39,8 +39,8 @@ export const CREATOR = {
   name: 'Yeri Loco',
   initials: 'YL',
   stats: [
-    { value: '4 años', label: 'haciendo lives' },
-    { value: '+300', label: 'batallas' },
+    { value: 'En vivo', label: 'TikTok, YouTube y Kick' },
+    { value: '+300', label: 'batallas y transmisiones' },
   ],
 } as const;
 
