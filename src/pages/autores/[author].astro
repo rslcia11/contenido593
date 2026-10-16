@@ -4,7 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getArticles, type Author } from '@/lib/content';
-import { authorSchema, breadcrumbSchema, schemaContext } from '@/lib/seo';
+import { breadcrumbSchema, organizationSchema, profilePageSchema, schemaContext } from '@/lib/seo';
 import { authorUrl, homeUrl } from '@/lib/urls';
 import { plural } from '@/lib/format';
 import HubHeader from '@/components/ui/HubHeader.astro';
@@ -26,24 +26,19 @@ const { author } = Astro.props;
 const articles = (await getArticles()).filter((a) => a.data.author.id === author.id);
 const crumbs = [{ label: 'Inicio', href: homeUrl() }, { label: author.data.name }];
 const ctx = schemaContext(Astro.site);
+const authorInfo = {
+  id: author.id,
+  name: author.data.name,
+  kind: author.data.kind,
+  url: authorUrl(author.id),
+  sameAs: author.data.links.map((l) => l.url),
+};
 ---
 
 <BaseLayout
   title={`${author.data.name}: ${author.data.role}`}
   description={author.data.bio}
-  schema={[
-    authorSchema(
-      {
-        id: author.id,
-        name: author.data.name,
-        kind: author.data.kind,
-        url: authorUrl(author.id),
-        sameAs: author.data.links.map((l) => l.url),
-      },
-      ctx,
-    ),
-    breadcrumbSchema(crumbs, ctx),
-  ]}
+  schema={[profilePageSchema(authorInfo, ctx), organizationSchema(ctx), breadcrumbSchema(crumbs, ctx)]}
 >
   <div class="wrap">
     <HubHeader

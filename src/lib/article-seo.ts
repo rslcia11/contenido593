@@ -3,7 +3,7 @@ import { getImage } from 'astro:assets';
 import type { SeoProps } from '@/components/seo/Seo.astro';
 import { SECTIONS } from '@/config/sections';
 import { articleHref, getAuthor, type Article } from './content';
-import { articleSchema, breadcrumbSchema, schemaContext } from './seo';
+import { articleSchema, breadcrumbSchema, organizationSchema, schemaContext } from './seo';
 import { authorUrl, withBase } from './urls';
 
 const DEFAULT_IMAGE = withBase('/og-default.png');
@@ -17,15 +17,25 @@ export async function articleSeo(
   const { data } = article;
   const path = articleHref(article);
   const author = await getAuthor(data.author.id);
-  const image = data.cover.image
-    ? (await getImage({ src: data.cover.image, width: 1200, height: 630, fit: 'cover', format: 'jpg' })).src
-    : DEFAULT_IMAGE;
+
+  let ogImage = DEFAULT_IMAGE;
+  let schemaImages: string[] = [DEFAULT_IMAGE];
+
+  if (data.cover.image) {
+    const [img16x9, img4x3, img1x1] = await Promise.all([
+      getImage({ src: data.cover.image, width: 1200, height: 675, fit: 'cover', format: 'jpg' }),
+      getImage({ src: data.cover.image, width: 1200, height: 900, fit: 'cover', format: 'jpg' }),
+      getImage({ src: data.cover.image, width: 1200, height: 1200, fit: 'cover', format: 'jpg' }),
+    ]);
+    ogImage = img16x9.src;
+    schemaImages = [img16x9.src, img4x3.src, img1x1.src];
+  }
 
   return {
     title: data.title,
     description: data.description,
     path,
-    image,
+    image: ogImage,
     ...(data.cover.alt ? { imageAlt: data.cover.alt } : {}),
     type: 'article',
     article: {
@@ -39,7 +49,7 @@ export async function articleSeo(
           url: path,
           title: data.title,
           description: data.description,
-          image,
+          image: schemaImages,
           publishedAt: data.publishedAt,
           updatedAt: data.updatedAt,
           section: SECTIONS[data.section].name,
@@ -54,6 +64,7 @@ export async function articleSeo(
         },
         ctx,
       ),
+      organizationSchema(ctx),
       breadcrumbSchema(crumbs, ctx),
     ],
   };

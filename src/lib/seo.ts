@@ -3,8 +3,8 @@
  * migas de pan, artículos y autores. Funciones puras: reciben URLs absolutas ya resueltas.
  * Docs: https://developers.google.com/search/docs/appearance/structured-data/article
  */
-import { SITE } from '@/config/site';
-import { homeUrl, searchUrl, withBase } from './urls';
+import { SITE, SOCIAL_LINKS } from '@/config/site';
+import { homeUrl, withBase } from './urls';
 
 export type JsonLd = Record<string, unknown>;
 
@@ -23,6 +23,7 @@ export function organizationSchema(ctx: SchemaContext): JsonLd {
     url: abs(homeUrl(), ctx),
     logo: { '@type': 'ImageObject', url: abs(withBase('/logo.png'), ctx), width: 512, height: 512 },
     email: SITE.email.contact,
+    sameAs: SOCIAL_LINKS.map((s) => s.url),
   };
 }
 
@@ -31,14 +32,10 @@ export function websiteSchema(ctx: SchemaContext): JsonLd {
     '@type': 'WebSite',
     '@id': abs(`${homeUrl()}#website`, ctx),
     name: SITE.name,
+    alternateName: 'contenido 593',
     url: abs(homeUrl(), ctx),
     inLanguage: SITE.lang,
     publisher: { '@id': abs(`${homeUrl()}#organization`, ctx) },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${abs(searchUrl(), ctx)}?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 
@@ -72,11 +69,45 @@ export function authorSchema(author: AuthorInfo, ctx: SchemaContext): JsonLd {
   };
 }
 
+export function profilePageSchema(author: AuthorInfo, ctx: SchemaContext): JsonLd {
+  return {
+    '@type': 'ProfilePage',
+    '@id': abs(`${author.url}#profile`, ctx),
+    url: abs(author.url, ctx),
+    mainEntity: authorSchema(author, ctx),
+  };
+}
+
+export function collectionPageSchema(
+  title: string,
+  description: string,
+  url: string,
+  items: { name: string; url: string }[],
+  ctx: SchemaContext,
+): JsonLd {
+  return {
+    '@type': 'CollectionPage',
+    '@id': abs(`${url}#collection`, ctx),
+    url: abs(url, ctx),
+    name: title,
+    description,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: abs(item.url, ctx),
+        name: item.name,
+      })),
+    },
+  };
+}
+
 export interface ArticleSchemaInput {
   url: string;
   title: string;
   description: string;
-  image: string;
+  image: string | string[];
   publishedAt: Date;
   updatedAt?: Date | undefined;
   section: string;
@@ -85,13 +116,14 @@ export interface ArticleSchemaInput {
 }
 
 export function articleSchema(input: ArticleSchemaInput, ctx: SchemaContext): JsonLd {
+  const images = Array.isArray(input.image) ? input.image : [input.image];
   return {
     '@type': input.news ? 'NewsArticle' : 'Article',
     '@id': abs(`${input.url}#article`, ctx),
     mainEntityOfPage: abs(input.url, ctx),
     headline: input.title,
     description: input.description,
-    image: [abs(input.image, ctx)],
+    image: images.map((img) => abs(img, ctx)),
     datePublished: input.publishedAt.toISOString(),
     dateModified: (input.updatedAt ?? input.publishedAt).toISOString(),
     articleSection: input.section,

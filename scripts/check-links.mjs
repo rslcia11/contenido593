@@ -53,9 +53,19 @@ let checked = 0;
 for (const page of pages) {
   const html = await readFile(page, 'utf8');
   const rel = path.relative(DIST, page);
-  if (!/<title>[^<]+<\/title>/.test(html)) problems.push(`${rel}: falta <title>`);
-  if (!/<meta name="description" content="[^"]{30,}"/.test(html))
-    problems.push(`${rel}: falta meta description`);
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/);
+  if (!titleMatch) problems.push(`${rel}: falta <title>`);
+  else if (titleMatch[1].length > 85)
+    problems.push(
+      `${rel}: <title> demasiado largo (${titleMatch[1].length} caracteres, máximo recomendado 85)`,
+    );
+
+  const descMatch = html.match(/<meta name="description" content="([^"]+)"/);
+  if (!descMatch || descMatch[1].length < 30)
+    problems.push(`${rel}: falta meta description o es menor a 30 caracteres`);
+  else if (descMatch[1].length > 220)
+    problems.push(`${rel}: meta description demasiado larga (${descMatch[1].length} caracteres, máximo 220)`);
+
   if (!/<link rel="canonical" href="https?:\/\/[^"]+"/.test(html)) problems.push(`${rel}: falta canonical`);
 
   for (const [, attr, raw] of html.matchAll(/\s(href|src)="([^"]+)"/g)) {

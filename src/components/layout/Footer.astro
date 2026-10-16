@@ -30,7 +30,9 @@ const sections = await getNavSections();
         <ul>
           {SOCIAL_LINKS.map((s) => (
             <li>
-              <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name}</a>
+              <a href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.name}
+              </a>
             </li>
           ))}
         </ul>

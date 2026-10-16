@@ -6,6 +6,9 @@ import { satteri } from '@astrojs/markdown-satteri';
 import { inArticleAdsPlugin } from './src/lib/markdown/in-article-ads';
 import { baseLinksPlugin } from './src/lib/markdown/base-links';
 import { buildCspDirectives, scriptSources, styleSources } from './src/config/csp';
+import { buildSitemapDates } from './src/lib/sitemap-dates';
+
+const sitemapDates = buildSitemapDates();
 
 // Las variables de .env no están en process.env cuando se lee este archivo:
 // https://docs.astro.build/en/guides/environment-variables/#in-the-astro-config-file
@@ -42,6 +45,15 @@ export default defineConfig({
     mdx(),
     sitemap({
       filter: (page) => !/\/(buscar|404)\/?$/.test(new URL(page).pathname),
+      serialize(item) {
+        const path = new URL(item.url).pathname;
+        const normalized = path.endsWith('/') ? path : `${path}/`;
+        const lastmod = sitemapDates.get(normalized);
+        if (lastmod) {
+          item.lastmod = lastmod.toISOString();
+        }
+        return item;
+      },
     }),
   ],
   // Tipografía servida desde el propio sitio (sin Google Fonts): más rápida y sin cookies de terceros.

@@ -2,12 +2,16 @@ import { describe, expect, it } from 'vitest';
 import {
   articleSchema,
   breadcrumbSchema,
+  collectionPageSchema,
   graph,
+  organizationSchema,
+  profilePageSchema,
   schemaContext,
   serializeJsonLd,
   websiteSchema,
 } from '@/lib/seo';
 import { buildNewsSitemap } from '@/lib/news-sitemap';
+import { buildSitemapDates } from '@/lib/sitemap-dates';
 import { buildRobotsTxt } from '@/lib/robots';
 import { adsTxtLine, validateAdsConfig } from '@/config/ads';
 import { buildCspDirectives, scriptSources, styleSources } from '@/config/csp';
@@ -48,11 +52,40 @@ describe('datos estructurados', () => {
     expect(articleSchema({ ...input, news: false }, ctx)['@type']).toBe('Article');
   });
 
-  it('declara el buscador del sitio para Google', () => {
-    const site = websiteSchema(ctx) as { potentialAction: { target: { urlTemplate: string } } };
-    expect(site.potentialAction.target.urlTemplate).toBe(
-      'https://ejemplo.com/buscar/?q={search_term_string}',
+  it('declara WebSite con alternateName y publisher', () => {
+    const site = websiteSchema(ctx);
+    expect(site['@type']).toBe('WebSite');
+    expect(site['name']).toBe('contenido593');
+    expect(site['alternateName']).toBe('contenido 593');
+  });
+
+  it('declara Organization con sameAs para redes oficiales', () => {
+    const org = organizationSchema(ctx);
+    expect(org['@type']).toBe('Organization');
+    expect(org['name']).toBe('contenido593');
+    expect(Array.isArray(org['sameAs'])).toBe(true);
+    expect((org['sameAs'] as string[]).length).toBeGreaterThan(0);
+  });
+
+  it('declara ProfilePage para autores', () => {
+    const profile = profilePageSchema(
+      { id: 'yeri-loco', name: 'Yeri Loco', kind: 'person', url: '/autores/yeri-loco/' },
+      ctx,
     );
+    expect(profile['@type']).toBe('ProfilePage');
+    expect((profile['mainEntity'] as Record<string, unknown>)['@type']).toBe('Person');
+  });
+
+  it('declara CollectionPage con ItemList para secciones', () => {
+    const col = collectionPageSchema(
+      'Juegos',
+      'Guías de juegos',
+      '/juegos/',
+      [{ name: 'Minecraft', url: '/juegos/minecraft/' }],
+      ctx,
+    );
+    expect(col['@type']).toBe('CollectionPage');
+    expect((col['mainEntity'] as Record<string, unknown>)['@type']).toBe('ItemList');
   });
 
   it('no permite cerrar la etiqueta <script> desde el contenido', () => {
@@ -63,6 +96,18 @@ describe('datos estructurados', () => {
 
   it('exige el dominio del sitio', () => {
     expect(() => schemaContext(undefined)).toThrow();
+  });
+});
+
+describe('sitemap lastmod', () => {
+  it('encuentra fechas reales de artículos y páginas', () => {
+    const dates = buildSitemapDates();
+    expect(dates.size).toBeGreaterThan(20);
+    expect(dates.has('/juegos/minecraft/diamantes-minecraft/')).toBe(true);
+    expect(dates.has('/anuncia/')).toBe(true);
+    const date = dates.get('/juegos/minecraft/diamantes-minecraft/');
+    expect(date).toBeInstanceOf(Date);
+    expect(isNaN(date!.getTime())).toBe(false);
   });
 });
 
