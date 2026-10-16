@@ -2,7 +2,7 @@
 /** Tarjeta del creador: su experiencia es la razón para confiar en las guías. */
 import { CREATOR } from '@/config/site';
 import { getAuthor } from '@/lib/content';
-import { authorUrl, sectionUrl } from '@/lib/urls';
+import { authorUrl } from '@/lib/urls';
 import Avatar from '@/components/ui/Avatar.astro';
 
 const author = await getAuthor(CREATOR.authorId);
@@ -23,7 +23,7 @@ const author = await getAuthor(CREATOR.authorId);
     ))}
   </dl>
   <div class="actions">
-    <a class="btn" href={sectionUrl('creadores')}>
+    <a class="btn" href={authorUrl(author.id)}>
       Ver sus guías
     </a>
     <a class="profile" href={authorUrl(author.id)}>

@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { CREATOR, KEY_ARTICLES, POPULAR_SEARCHES, SITE } from '@/config/site';
+import { KEY_ARTICLES, POPULAR_SEARCHES, SITE } from '@/config/site';
 import { SECTIONS } from '@/config/sections';
 import { articleHref, getArticle, getArticles } from '@/lib/content';
 import { featured, inSection, sortByPublished } from '@/lib/article-utils';
@@ -34,7 +34,7 @@ const ctx = schemaContext(Astro.site);
 
 <BaseLayout
   title={SITE.tagline}
-  description={`Minecraft, Roblox, GTA VI, Free Fire y TikTok LIVE explicado fácil por ${CREATOR.name}. ${SITE.description}`}
+  description="Configuraciones de juegos, guías paso a paso y el mejor equipo para jugar o transmitir. Respaldado por fuentes oficiales y sin relleno."
   schema={[organizationSchema(ctx), websiteSchema(ctx)]}
 >
   <div class="wrap">
@@ -44,8 +44,8 @@ const ctx = schemaContext(Astro.site);
           Guías gamer y <span class="mark">trucos para creadores</span>.
         </h1>
         <p>
-          Minecraft, Roblox, GTA VI, Free Fire y TikTok LIVE, explicado fácil por {CREATOR.name}, que juega y
-          hace lives todos los días.
+          Configuraciones de juegos, guías paso a paso y el mejor equipo para jugar o transmitir. Todo
+          respaldado por fuentes oficiales y sin relleno.
         </p>
         <SearchBox id="q-home" />
         <p class="popular">

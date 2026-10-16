@@ -4,14 +4,15 @@ import { inGame } from '@/lib/article-utils';
 import { gameUrl, sectionUrl } from '@/lib/urls';
 import { plural } from '@/lib/format';
 import Icon from '@/components/ui/Icon.astro';
+import GameBadge from '@/components/ui/GameBadge.astro';
 
 const [games, articles] = await Promise.all([getGames(), getArticles()]);
 ---
 
 <div class="games">
   {games.map((game) => (
-    <a class="game pressable" href={gameUrl(game.id)}>
-      <Icon name={game.data.icon} />
+    <a class={`game game--${game.id} pressable`} href={gameUrl(game.id)} data-game={game.id}>
+      <GameBadge game={game.id} size={40} />
       <div>
         <strong>{game.data.name}</strong>
         <small>{plural(inGame(articles, game.id).length, 'artículo')}</small>
@@ -19,7 +20,9 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     </a>
   ))}
   <a class="game game--all pressable" href={sectionUrl('juegos')}>
-    <Icon name="grid" />
+    <div class="all-icon-wrap">
+      <Icon name="grid" size={32} />
+    </div>
     <div>
       <strong>Todos</strong>
       <small>{plural(games.length, 'juego')}</small>
@@ -39,22 +42,48 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     box-shadow: var(--shadow-pop);
-    padding: 14px;
+    padding: 16px;
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-width: 0;
+    transition:
+      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+    text-decoration: none;
+    color: var(--color-text);
   }
 
   .game:hover {
-    background: var(--color-accent);
-    color: var(--color-on-accent);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-pop-2);
   }
 
-  .game:hover small {
-    color: var(--color-on-accent);
+  .game--minecraft:hover {
+    border-color: #5cb82e;
+    box-shadow: 0 10px 24px -6px rgba(92, 184, 46, 0.35);
+  }
+
+  .game--roblox:hover {
+    border-color: #00a2ff;
+    box-shadow: 0 10px 24px -6px rgba(0, 162, 255, 0.35);
+  }
+
+  .game--gta6:hover {
+    border-color: #ff007f;
+    box-shadow: 0 10px 24px -6px rgba(255, 0, 127, 0.4);
+  }
+
+  .game--freefire:hover {
+    border-color: #ff6b00;
+    box-shadow: 0 10px 24px -6px rgba(255, 107, 0, 0.4);
+  }
+
+  .game--fortnite:hover {
+    border-color: #00f0ff;
+    box-shadow: 0 10px 24px -6px rgba(0, 240, 255, 0.35);
   }
 
   strong {
@@ -63,6 +92,7 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     font-size: clamp(18px, 1.9vw, 24px);
     line-height: 1.05;
     display: block;
+    margin-top: 8px;
   }
 
   small {
@@ -72,9 +102,12 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     margin-top: 4px;
   }
 
-  .game :global(svg) {
-    width: 34px;
-    height: 34px;
+  .all-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
   }
 
   .game--all {

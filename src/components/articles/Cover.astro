@@ -80,6 +80,13 @@ const sizes = size === 'hero' ? '(min-width: 1320px) 1224px, 100vw' : '(min-widt
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: center center;
+  }
+
+  :global(.card:hover) img,
+  :global(.pressable:hover) img {
+    transform: scale(1.04);
   }
 
   .label {
