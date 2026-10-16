@@ -10,21 +10,26 @@ export interface CommunityChannel {
   url?: string;
 }
 
+export interface SocialLink {
+  name: string;
+  url: string;
+}
+
 export const SITE = {
-  name: 'entretenimiento593',
+  name: 'contenido593',
   /** Partes del logotipo: texto normal + resaltado. */
-  logo: { text: 'entretenimiento', highlight: '593' },
-  tagline: 'Guías de juegos y trucos para creadores',
+  logo: { text: 'contenido', highlight: '593' },
+  tagline: 'Guías gamer y trucos para creadores',
   description:
-    'Guías de juegos, equipo, trucos para creadores, noticias gamer y virales. Hecho en Ecuador para toda Latinoamérica.',
+    'Guías de juegos, equipo, trucos para creadores y noticias gamer. Hecho en Ecuador para toda Latinoamérica.',
   locale: 'es-EC',
   lang: 'es',
   timeZone: 'America/Guayaquil',
   themeColor: '#0d1023',
   foundingYear: 2026,
   email: {
-    contact: 'hola@entretenimiento593.com',
-    sales: 'marcas@entretenimiento593.com',
+    contact: 'hola@contenido593.com',
+    sales: 'marcas@contenido593.com',
   },
 } as const;
 
@@ -38,6 +43,14 @@ export const CREATOR = {
     { value: '+300', label: 'batallas' },
   ],
 } as const;
+
+/** Redes sociales oficiales de la marca (E-E-A-T, Google sameAs y pie de página). */
+export const SOCIAL_LINKS: readonly SocialLink[] = [
+  { name: 'TikTok', url: 'https://www.tiktok.com/@contenido593' },
+  { name: 'YouTube', url: 'https://www.youtube.com/@contenido593' },
+  { name: 'Kick', url: 'https://kick.com/contenido593' },
+  { name: 'Instagram', url: 'https://www.instagram.com/contenido593' },
+];
 
 /** Canales de la comunidad: deja solo los que use el creador. */
 export const COMMUNITY: readonly CommunityChannel[] = [

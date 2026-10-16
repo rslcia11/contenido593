@@ -5,12 +5,22 @@
   role: Creador de contenido
   kind: person
   bio: Hace lives y batallas en TikTok y streamea Minecraft, Roblox y Free Fire desde hace 4 años. Aquí cuenta lo que le funcionó de verdad.
-  links: []
+  links:
+    - name: TikTok
+      url: https://www.tiktok.com/@yeriloco
+    - name: Kick
+      url: https://kick.com/yeriloco
 
 - id: redaccion
-  name: Redacción entretenimiento593
+  name: Redacción contenido593
   initials: '593'
   role: Equipo editorial
   kind: organization
-  bio: El equipo editorial del sitio. Investigamos cada tema en las fuentes oficiales de los juegos y plataformas, enlazamos esas fuentes en cada artículo y actualizamos las guías cuando algo cambia.
-  links: []
+  bio: El equipo editorial de contenido593. Investigamos cada tema en las fuentes oficiales de los juegos y plataformas, enlazamos esas fuentes en cada artículo y actualizamos las guías cuando algo cambia.
+  links:
+    - name: TikTok
+      url: https://www.tiktok.com/@contenido593
+    - name: YouTube
+      url: https://www.youtube.com/@contenido593
+    - name: Kick
+      url: https://kick.com/contenido593

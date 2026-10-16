@@ -1,9 +1,9 @@
 {
-  "name": "entretenimiento593",
+  "name": "contenido593",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Guías de juegos y trucos para creadores. Sitio estático con Astro.",
+  "description": "Guías gamer y trucos para creadores. Sitio estático con Astro.",
   "engines": {
     "node": ">=22.12.0"
   },

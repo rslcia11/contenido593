@@ -18,10 +18,10 @@ const icon = (size, radius) => `
 const og = `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${INK}"/>
-  <text x="80" y="200" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="96" fill="#FFFFFF" letter-spacing="-3">entretenimiento</text>
+  <text x="80" y="200" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="96" fill="#FFFFFF" letter-spacing="-3">contenido</text>
   <rect x="80" y="240" width="250" height="124" rx="12" fill="${YELLOW}"/>
   <text x="104" y="336" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="96" fill="${INK}" letter-spacing="-3">593</text>
-  <text x="80" y="450" font-family="DejaVu Sans, Arial, sans-serif" font-size="42" fill="#CFCFCF">Guías de juegos y trucos para creadores</text>
+  <text x="80" y="450" font-family="DejaVu Sans, Arial, sans-serif" font-size="42" fill="#CFCFCF">Guías gamer y trucos para creadores</text>
   <rect x="0" y="560" width="1200" height="70" fill="${YELLOW}"/>
   <text x="80" y="606" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="28" fill="${INK}">Hecho en Ecuador para toda Latinoamérica</text>
 </svg>`;

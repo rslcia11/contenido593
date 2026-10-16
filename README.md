@@ -1,6 +1,6 @@
-# entretenimiento593
+# contenido593
 
-Guías de juegos y trucos para creadores. Hecho en Ecuador para toda Latinoamérica.
+Guías gamer y trucos para creadores. Hecho en Ecuador para toda Latinoamérica.
 
 Sitio **estático** hecho con [Astro 7](https://docs.astro.build/): cada página se genera como HTML al construir el sitio, sin servidor ni base de datos. Es lo más rápido posible (mejor Core Web Vitals, anuncios más visibles, mejor RPM), cuesta $0 en hosting y no hay nada que hackear.
 

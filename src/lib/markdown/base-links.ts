@@ -8,7 +8,7 @@ import { joinBase } from '../urls';
  */
 export function baseLinksPlugin(base: string) {
   return defineHastPlugin({
-    name: 'entretenimiento593:base-links',
+    name: 'contenido593:base-links',
     element: {
       filter: ['a'],
       visit(node, ctx) {

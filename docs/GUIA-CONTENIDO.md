@@ -71,7 +71,7 @@ cover:
   tone: inverse
   image: ../../../assets/covers/portal-nether.png
   alt: 'Ilustración de un marco de bloques oscuros con un remolino morado en el centro'
-  caption: 'Ilustración: entretenimiento593'
+  caption: 'Ilustración: contenido593'
 ```
 
 Reglas de las portadas, basadas en lo que funciona en Google Discover y en redes:

@@ -1,7 +1,7 @@
 {
-  "name": "entretenimiento593",
-  "short_name": "e593",
-  "description": "Guías de juegos y trucos para creadores",
+  "name": "contenido593",
+  "short_name": "c593",
+  "description": "Guías gamer y trucos para creadores",
   "lang": "es",
   "start_url": "./",
   "display": "browser",

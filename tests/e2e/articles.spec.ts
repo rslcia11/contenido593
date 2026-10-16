@@ -9,7 +9,7 @@ test.describe('artículo de guía', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
       'Cómo encontrar diamantes en Minecraft',
     );
-    await expect(page.getByRole('link', { name: 'Redacción entretenimiento593' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Redacción contenido593' })).toHaveAttribute(
       'href',
       '/autores/redaccion/',
     );
@@ -109,7 +109,7 @@ test('el botón "Copiar enlace" copia la URL canónica', async ({ page, context 
 
 test('el perfil de la redacción lista todos sus artículos', async ({ page }) => {
   await page.goto('/autores/redaccion/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Redacción entretenimiento593');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Redacción contenido593');
   await expect(page.locator('#contenido .row')).toHaveCount(20);
 });
 

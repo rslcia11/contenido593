@@ -64,7 +64,7 @@ function blockName(node: AnyNode): string | undefined {
 }
 
 export const inArticleAdsPlugin = defineHastPlugin({
-  name: 'entretenimiento593:in-article-ads',
+  name: 'contenido593:in-article-ads',
   after(root, ctx) {
     // Solo artículos (MDX); las páginas en Markdown simple no llevan anuncios.
     if (ctx.sourceFormat !== 'mdx') return;

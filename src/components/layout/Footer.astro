@@ -1,5 +1,5 @@
 ---
-import { FOOTER_LINKS, SITE } from '@/config/site';
+import { FOOTER_LINKS, SITE, SOCIAL_LINKS } from '@/config/site';
 import { SECTIONS } from '@/config/sections';
 import { getNavSections } from '@/lib/content';
 import { sectionUrl, withBase } from '@/lib/urls';
@@ -21,6 +21,16 @@ const sections = await getNavSections();
           {sections.map((id) => (
             <li>
               <a href={sectionUrl(id)}>{SECTIONS[id].name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <nav aria-labelledby="foot-redes">
+        <h2 id="foot-redes">Redes</h2>
+        <ul>
+          {SOCIAL_LINKS.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name}</a>
             </li>
           ))}
         </ul>
@@ -66,8 +76,8 @@ const sections = await getNavSections();
 
   .foot {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr));
+    gap: 24px;
     font-size: 0.9375rem;
   }
 
