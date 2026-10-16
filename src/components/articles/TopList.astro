@@ -1,6 +1,7 @@
 ---
-/** Lista numerada ("Lo más leído"). */
+/** Lista numerada ("Lo más leído") con portadas visuales. */
 import { articleHref, articleKicker, type Article } from '@/lib/content';
+import Cover from './Cover.astro';
 
 interface Props {
   title: string;
@@ -12,15 +13,20 @@ const items = await Promise.all(articles.map(async (a) => ({ article: a, kicker:
 ---
 
 {items.length > 0 && (
-  <section class="top5" aria-label={title}>
+  <section class="top-ranking" aria-label={title}>
     <h2>{title}</h2>
     <ol>
       {items.map(({ article, kicker }) => (
-        <li>
-          <div>
-            <a href={articleHref(article)}>{article.data.title}</a>
-            <small>{kicker}</small>
-          </div>
+        <li class="ranking-item">
+          <a class="ranking-link pressable" href={articleHref(article)}>
+            <div class="ranking-thumb">
+              <Cover article={article} />
+            </div>
+            <div class="ranking-body">
+              <span class="ranking-kicker">{kicker}</span>
+              <h4>{article.data.title}</h4>
+            </div>
+          </a>
         </li>
       ))}
     </ol>
@@ -28,60 +34,110 @@ const items = await Promise.all(articles.map(async (a) => ({ article: a, kicker:
 )}
 
 <style>
+  .top-ranking {
+    background: var(--color-surface);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-pop);
+  }
+
   h2 {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: var(--weight-heavy);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: var(--border);
   }
 
   ol {
     list-style: none;
     margin: 0;
     padding: 0;
-    counter-reset: n;
+    counter-reset: rank;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  li {
-    counter-increment: n;
+  .ranking-item {
+    counter-increment: rank;
+    position: relative;
+  }
+
+  .ranking-link {
     display: grid;
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 8px;
-    padding: 12px 0;
-    border-top: var(--border);
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text);
+    padding: 6px;
+    border-radius: var(--radius-md);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
 
-  li::before {
-    content: counter(n);
+  .ranking-link:hover {
+    background: var(--color-bg-deep);
+    transform: translateX(3px);
+  }
+
+  .ranking-thumb {
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .ranking-thumb::before {
+    content: counter(rank);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 2;
+    background: var(--color-brand);
+    color: var(--color-on-brand);
     font-family: var(--font-display);
-    font-size: 1.375rem;
-    line-height: 1.1;
+    font-weight: var(--weight-heavy);
+    font-size: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-xs);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   }
 
-  li::before {
+  .ranking-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .ranking-kicker {
+    font-size: 0.6875rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-accent);
   }
 
-  li:first-child::before {
-    background: var(--color-brand);
-    color: var(--color-on-brand);
-    width: 28px;
-    text-align: center;
-    border-radius: var(--radius-xs);
+  h4 {
+    font-size: 0.875rem;
+    font-weight: var(--weight-heavy);
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
   }
 
-  a {
-    font-weight: var(--weight-semibold);
-    line-height: 1.35;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  small {
-    display: block;
-    color: var(--color-muted);
-    font-size: 0.8125rem;
-    margin-top: 2px;
+  .ranking-link:hover h4 {
+    color: var(--color-accent);
   }
 </style>

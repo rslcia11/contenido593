@@ -13,9 +13,9 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
   {games.map((game) => (
     <a class={`game game--${game.id} pressable`} href={gameUrl(game.id)} data-game={game.id}>
       <div class="badge-wrap">
-        <GameBadge game={game.id} size={54} />
+        <GameBadge game={game.id} size={70} />
       </div>
-      <div>
+      <div class="meta-wrap">
         <strong>{game.data.name}</strong>
         <small>{plural(inGame(articles, game.id).length, 'artículo')}</small>
       </div>
@@ -23,9 +23,9 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
   ))}
   <a class="game game--all pressable" href={sectionUrl('juegos')}>
     <div class="badge-wrap all-icon-wrap">
-      <Icon name="grid" size={44} />
+      <Icon name="grid" size={54} />
     </div>
-    <div>
+    <div class="meta-wrap">
       <strong>Todos</strong>
       <small>{plural(games.length, 'juego')}</small>
     </div>
@@ -36,7 +36,7 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
   .games {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 12px;
+    gap: 14px;
   }
 
   .game {
@@ -44,57 +44,68 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     border-radius: var(--radius-lg);
     background: var(--color-surface);
     box-shadow: var(--shadow-pop);
-    padding: 16px;
+    padding: 22px 12px 18px;
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     min-width: 0;
     transition:
-      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-      box-shadow 0.2s ease,
-      border-color 0.2s ease;
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
     text-decoration: none;
     color: var(--color-text);
+    gap: 10px;
   }
 
   .game:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-pop-2);
   }
 
   .game--minecraft:hover {
     border-color: #5cb82e;
-    box-shadow: 0 10px 24px -6px rgba(92, 184, 46, 0.35);
+    box-shadow: 0 12px 28px -6px rgba(92, 184, 46, 0.45);
   }
 
   .game--roblox:hover {
     border-color: #00a2ff;
-    box-shadow: 0 10px 24px -6px rgba(0, 162, 255, 0.35);
+    box-shadow: 0 12px 28px -6px rgba(0, 162, 255, 0.45);
   }
 
   .game--gta6:hover {
     border-color: #ff007f;
-    box-shadow: 0 10px 24px -6px rgba(255, 0, 127, 0.4);
+    box-shadow: 0 12px 28px -6px rgba(255, 0, 127, 0.5);
   }
 
   .game--freefire:hover {
     border-color: #ff6b00;
-    box-shadow: 0 10px 24px -6px rgba(255, 107, 0, 0.4);
+    box-shadow: 0 12px 28px -6px rgba(255, 107, 0, 0.5);
   }
 
   .game--fortnite:hover {
     border-color: #00f0ff;
-    box-shadow: 0 10px 24px -6px rgba(0, 240, 255, 0.35);
+    box-shadow: 0 12px 28px -6px rgba(0, 240, 255, 0.45);
+  }
+
+  .meta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
   }
 
   strong {
     font-family: var(--font-display);
-    font-weight: var(--weight-regular);
-    font-size: clamp(18px, 1.9vw, 24px);
-    line-height: 1.05;
+    font-weight: var(--weight-heavy);
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.1;
     display: block;
-    margin-top: 8px;
+    text-align: center;
   }
 
   small {
@@ -102,22 +113,20 @@ const [games, articles] = await Promise.all([getGames(), getArticles()]);
     font-size: 0.8125rem;
     color: var(--color-text-2);
     margin-top: 4px;
+    text-align: center;
   }
 
   .badge-wrap {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    height: 56px;
-    margin-bottom: 8px;
+    justify-content: center;
+    height: 72px;
+    width: 72px;
+    flex-shrink: 0;
   }
 
   .all-icon-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 54px;
-    height: 54px;
+    color: var(--color-on-accent);
   }
 
   .game--all {
