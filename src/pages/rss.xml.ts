@@ -12,6 +12,7 @@ export const GET: APIRoute = async ({ site }) => {
     title: SITE.name,
     description: SITE.description,
     site: new URL(homeUrl(), site),
+    stylesheet: '/rss-style.xsl',
     customData: `<language>${SITE.lang}</language>`,
     items: articles.map((a) => ({
       title: a.data.title,

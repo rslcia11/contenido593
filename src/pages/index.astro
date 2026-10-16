@@ -5,7 +5,7 @@ import { SECTIONS } from '@/config/sections';
 import { articleHref, getArticle, getArticles } from '@/lib/content';
 import { featured, inSection, sortByPublished } from '@/lib/article-utils';
 import { sectionUrl } from '@/lib/urls';
-import { organizationSchema, schemaContext, websiteSchema } from '@/lib/seo';
+import { organizationSchema, schemaContext, siteNavigationSchema, websiteSchema } from '@/lib/seo';
 import SearchBox from '@/components/search/SearchBox.astro';
 import TodayPanel from '@/components/home/TodayPanel.astro';
 import TrustStrip from '@/components/home/TrustStrip.astro';
@@ -34,7 +34,7 @@ const ctx = schemaContext(Astro.site);
 <BaseLayout
   title={SITE.tagline}
   description="Configuraciones de juegos, guías paso a paso y el mejor equipo para jugar o transmitir. Respaldado por fuentes oficiales y sin relleno."
-  schema={[organizationSchema(ctx), websiteSchema(ctx)]}
+  schema={[organizationSchema(ctx), websiteSchema(ctx), siteNavigationSchema(ctx)]}
 >
   <div class="wrap">
     <div class="hero">

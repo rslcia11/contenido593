@@ -39,6 +39,55 @@ export function websiteSchema(ctx: SchemaContext): JsonLd {
   };
 }
 
+export function siteNavigationSchema(ctx: SchemaContext): JsonLd {
+  const navItems = [
+    { name: 'Juegos', url: withBase('/juegos/'), description: 'Guías y trucos de videojuegos populares' },
+    {
+      name: 'Creadores',
+      url: withBase('/creadores/'),
+      description: 'Cómo hacer directos y ganar dinero en TikTok LIVE, Twitch y Kick',
+    },
+    {
+      name: 'Equipo Gamer',
+      url: withBase('/equipo/'),
+      description: 'Recomendaciones de hardware, audio y almacenamiento',
+    },
+    { name: 'Noticias', url: withBase('/noticias/'), description: 'Últimas novedades y lanzamientos gamer' },
+    {
+      name: 'Herramientas',
+      url: withBase('/herramientas/'),
+      description: 'Calculadora de diamantes, recomendador de celulares y generador de nombres',
+    },
+    { name: 'Free Fire', url: withBase('/juegos/freefire/'), description: 'Requisitos y guías de Free Fire' },
+    {
+      name: 'Roblox',
+      url: withBase('/juegos/roblox/'),
+      description: 'Códigos oficiales y seguridad en Roblox',
+    },
+    {
+      name: 'GTA VI',
+      url: withBase('/juegos/gta6/'),
+      description: 'Lanzamiento, precio y novedades de GTA 6',
+    },
+    {
+      name: 'Minecraft',
+      url: withBase('/juegos/minecraft/'),
+      description: 'Diamantes, portales y multijugador en Minecraft',
+    },
+  ];
+
+  return {
+    '@type': 'ItemList',
+    itemListElement: navItems.map((item, index) => ({
+      '@type': 'SiteNavigationElement',
+      position: index + 1,
+      name: item.name,
+      description: item.description,
+      url: abs(item.url, ctx),
+    })),
+  };
+}
+
 export function breadcrumbSchema(items: { label: string; href?: string }[], ctx: SchemaContext): JsonLd {
   return {
     '@type': 'BreadcrumbList',
