@@ -51,6 +51,8 @@ const articles = defineCollection({
     z
       .object({
         title: z.string().min(10).max(110),
+        /** Título optimizado para <title> y snippet de SERP (máx. 70 caracteres para permitir " · marca"). */
+        seoTitle: z.string().min(10).max(70).optional(),
         /** Entradilla: aparece bajo el título, en las tarjetas y como meta description. */
         description: z.string().min(30).max(200),
         /** "Respuesta corta": lo que la persona vino a buscar, en dos líneas. */
@@ -101,6 +103,13 @@ const articles = defineCollection({
         if (data.cover.image && !data.cover.alt) issue('Toda imagen de portada necesita `alt`.', 'cover');
         if (data.updatedAt && data.updatedAt < data.publishedAt)
           issue('`updatedAt` no puede ser anterior a `publishedAt`.', 'updatedAt');
+        const effectiveTitle = data.seoTitle ?? data.title;
+        if (effectiveTitle.length > 70) {
+          issue(
+            `El título efectivo ("${effectiveTitle}") excede 70 caracteres (${effectiveTitle.length}) y superará el límite de 85 con " · contenido593". Define un \`seoTitle\` conciso (≤ 70 caracteres) o acorta el título.`,
+            data.seoTitle ? 'seoTitle' : 'title',
+          );
+        }
       }),
 });
 

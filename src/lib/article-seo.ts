@@ -32,7 +32,7 @@ export async function articleSeo(
   }
 
   return {
-    title: data.title,
+    title: data.seoTitle ?? data.title,
     description: data.description,
     path,
     image: ogImage,
