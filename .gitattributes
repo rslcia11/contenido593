@@ -1,0 +1,15 @@
+# Finales de línea LF en todo el repo, sin importar el sistema operativo de quien clone.
+# Evita que Prettier marque todos los archivos en Windows (core.autocrlf=true convierte a CRLF).
+* text=auto eol=lf
+
+# Binarios: nunca convertir ni intentar unir cambios.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
