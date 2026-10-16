@@ -8,7 +8,7 @@ interface Props {
 const { game, size = 72, class: className = '' } = Astro.props;
 ---
 
-<div class={`game-badge game-badge--${game} ${className}`} style={`--size: ${size}px;`}>
+<div class={`game-badge game-badge--${game} ${className}`}>
   {/* ---------- MINECRAFT: Bloque de césped 3D isométrico grande y detallado ---------- */}
   {game === 'minecraft' && (
     <svg viewBox="0 0 48 48" width={size} height={size} fill="none" aria-hidden="true">
@@ -223,8 +223,6 @@ const { game, size = 72, class: className = '' } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--size);
-    height: var(--size);
     flex-shrink: 0;
     transition:
       transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),

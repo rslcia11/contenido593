@@ -3,7 +3,7 @@ import { getImage } from 'astro:assets';
 import type { SeoProps } from '@/components/seo/Seo.astro';
 import { SECTIONS } from '@/config/sections';
 import { articleHref, getAuthor, type Article } from './content';
-import { articleSchema, breadcrumbSchema, organizationSchema, schemaContext } from './seo';
+import { articleSchema, breadcrumbSchema, schemaContext } from './seo';
 import { authorUrl, withBase } from './urls';
 
 const DEFAULT_IMAGE = withBase('/og-default.png');
@@ -64,7 +64,6 @@ export async function articleSeo(
         },
         ctx,
       ),
-      organizationSchema(ctx),
       breadcrumbSchema(crumbs, ctx),
     ],
   };
