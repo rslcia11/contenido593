@@ -5,7 +5,7 @@ name: Desplegar en GitHub Pages
 
 on:
   push:
-    branches: [claude/confident-hamilton-ni5yb0]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
