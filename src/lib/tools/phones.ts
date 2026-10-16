@@ -91,7 +91,7 @@ const RECOMMENDATIONS: Record<PhoneGame, Record<Budget, PhoneRecommendation>> = 
     low: {
       tier: 'Gama de entrada',
       advice:
-        'Mueve Minecraft Bedrock fluido con distancia de renderizado de 8 a 10 chunks. Recomendado jugar sin paquetes de texturas pesados ni shaders experimentales para cuidar los fotogramas.',
+        'Minecraft corre en gráficos bajos o medios: mueve Minecraft Bedrock fluido con distancia de renderizado de 8 a 10 chunks. Recomendado jugar sin paquetes de texturas pesados ni shaders experimentales para cuidar los fotogramas.',
       models: ['Samsung Galaxy A05s', 'Xiaomi Redmi 13C', 'Motorola Moto G24 Power'],
       specs: '6 GB RAM • Batería 5.000 mAh • Distancia sugerida: 8-10 chunks',
     },
