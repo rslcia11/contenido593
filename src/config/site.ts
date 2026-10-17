@@ -28,8 +28,8 @@ export const SITE = {
   themeColor: '#0d1023',
   foundingYear: 2026,
   email: {
-    contact: 'hola@contenido593.com',
-    sales: 'marcas@contenido593.com',
+    contact: 'wm911m@gmail.com',
+    sales: 'wm911m@gmail.com',
   },
 } as const;
 
