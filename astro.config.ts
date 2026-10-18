@@ -14,6 +14,8 @@ const sitemapDates = buildSitemapDates();
 // https://docs.astro.build/en/guides/environment-variables/#in-the-astro-config-file
 const env = loadEnv(process.env['NODE_ENV'] ?? 'production', process.cwd(), '');
 const adsProvider = env['PUBLIC_ADS_PROVIDER'] ?? 'placeholder';
+const adsClient = env['PUBLIC_ADSENSE_CLIENT'] ?? 'ca-pub-7344839267928272';
+const effectiveAdsProvider = adsClient ? 'adsense' : adsProvider;
 // Subcarpeta donde vive el sitio: '/' en un dominio propio, '/novedades593' en GitHub Pages.
 const base = env['BASE_PATH'] || '/';
 
@@ -96,12 +98,12 @@ export default defineConfig({
   ],
   security: {
     csp: {
-      directives: buildCspDirectives(adsProvider),
+      directives: buildCspDirectives(effectiveAdsProvider),
       scriptDirective: {
-        resources: scriptSources(adsProvider),
+        resources: scriptSources(effectiveAdsProvider),
       },
       styleDirective: {
-        resources: styleSources(adsProvider),
+        resources: styleSources(effectiveAdsProvider),
       },
     },
   },
@@ -119,6 +121,7 @@ export default defineConfig({
         access: 'public',
         optional: true,
         startsWith: 'ca-pub-',
+        default: 'ca-pub-7344839267928272',
       }),
     },
   },
